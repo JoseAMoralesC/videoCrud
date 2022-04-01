@@ -13,11 +13,15 @@ class MovieRepository{
     }
 
     public function insert($movie){
-        return Movie::insert($movie)->sync($movie->acotr);
+        $mov = Movie::create($movie);
+        $mov->actors()->sync($movie['actor']);
+        return $mov->genres()->sync($movie['genre']);
     }
 
-    public function update($actor, $data){
-        return $actor->update($data);
+    public function update($movie, $data){
+        $mov = $movie->update($data);
+        $mov->actors()->sync($movie['actor']);
+        return $mov->genres()->sync($movie['genre']);
     }
 
     public function delete($movie){

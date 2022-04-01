@@ -21,7 +21,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#multi-actors').multiselect({
+            $('#multi-actors, #multi-genres').multiselect({
                 nonSelectedText: '{{ __('Selecciona') }}',
                 allSelectedText: '{{ __('Todos seleccionados') }}',
                 nSelectedText: '{{ __('seleccionados') }}',

@@ -46,6 +46,13 @@
 </div>
 
 <div class="form-group">
+    {{Form::label('genre',__('Generos'),array('class' => 'control-label'))}}
+    <div class="col-auto">
+        {{ Form::select('genre[]', $genres, null, array('id'=> 'multi-genres', 'multiple'=>'multiple')) }}
+    </div>
+</div>
+
+<div class="form-group">
     <a href="{{ route('movies.index') }}" class="btn btn-danger">Volver</a>
    {{ Form::submit(__('Enviar'), array('class' => 'btn btn-success')) }}
 </div>

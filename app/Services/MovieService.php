@@ -11,6 +11,17 @@ class MovieService{
         $this->movieRepository = $movieRepository;
     }
 
+    /*public function store($data){
+        foreach($data as $i=>$val){
+            if($i != 'actor'){
+                $movie[$i] = $val;
+            }else{
+                $actor = array_map(null,$val);
+            }
+        }
+        return $this->movieRepository->insert($movie,$actor);
+    }*/
+
     public function store($data){
         return $this->movieRepository->insert($data);
     }

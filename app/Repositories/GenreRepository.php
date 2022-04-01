@@ -8,6 +8,10 @@ class GenreRepository{
         return Genre::all();
     }
 
+    public function listGenreNameInArray(){
+        return Genre::all()->pluck('name', 'id');
+    }
+
     public function getById($id){
         return Genre::find($id);
     }

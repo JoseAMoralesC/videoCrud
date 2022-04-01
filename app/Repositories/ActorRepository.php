@@ -28,7 +28,7 @@ class ActorRepository{
         return $actor->get();
     }
 
-    public function listActorNmaeInArray(){
+    public function listActorNameInArray(){
         return DB::table('actors')->select(DB::raw('concat_ws(" ",name,last_name1,last_name2) as surname, id'))->pluck('surname', 'id');
     }
 
