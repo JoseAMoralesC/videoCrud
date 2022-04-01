@@ -19,9 +19,9 @@ class MovieRepository{
     }
 
     public function update($movie, $data){
-        $mov = $movie->update($data);
-        $mov->actors()->sync($movie['actor']);
-        return $mov->genres()->sync($movie['genre']);
+        $movie->update($data);
+        $movie->actors()->sync($movie['actor']);
+        return $movie->genres()->sync($movie['genre']);
     }
 
     public function delete($movie){

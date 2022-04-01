@@ -41,14 +41,14 @@
 <div class="form-group">
     {{Form::label('actor',__('Actores'),array('class' => 'control-label'))}}
     <div class="col-auto">
-        {{ Form::select('actor[]', $actors, null, array('id'=> 'multi-actors', 'multiple'=>'multiple')) }}
+        {{ Form::select('actor[]', $actors, isset($movie->actors) ? $movie->actors : null, array('id'=> 'multi-actors', 'multiple'=>'multiple')) }}
     </div>
 </div>
 
 <div class="form-group">
     {{Form::label('genre',__('Generos'),array('class' => 'control-label'))}}
     <div class="col-auto">
-        {{ Form::select('genre[]', $genres, null, array('id'=> 'multi-genres', 'multiple'=>'multiple')) }}
+        {{ Form::select('genre[]', $genres, isset($movie->genres) ? $movie->genres : null, array('id'=> 'multi-genres', 'multiple'=>'multiple')) }}
     </div>
 </div>
 
