@@ -24,6 +24,7 @@ use App\Http\Controllers\Actors;
 */
 Route::prefix('')->name('home.')->group(function(){
     Route::get('',[Home\IndexController::class, 'index'])->name('index');
+    Route::get('indexAjax',[Home\IndexController::class, 'indexAJAX'])->name('indexAjax');
 });
 
 

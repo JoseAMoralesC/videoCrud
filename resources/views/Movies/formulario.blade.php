@@ -53,6 +53,13 @@
 </div>
 
 <div class="form-group">
+    {{Form::label('nationality_id', __('Nacionalidad'),array('class' => 'control-label'))}}
+    <div class="col-auto">
+        {{ Form::select('nationality_id', $nationalities, isset($movie->nationality_id) ? $movie->nationality_id : null, array('id'=> 'multi-nationalities', 'placeholder'=>'Selecciona una nacionalidad')) }}
+    </div>
+</div>
+
+<div class="form-group">
     <a href="{{ route('movies.index') }}" class="btn btn-danger">Volver</a>
    {{ Form::submit(__('Enviar'), array('class' => 'btn btn-success')) }}
 </div>

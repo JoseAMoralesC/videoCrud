@@ -9,8 +9,11 @@ class Nationality extends Model
 {
     use HasFactory;
 
+    protected  $fillable = [
+        'name'
+    ];
     public function actors(){
-        return $this->hasMany(Actor::class);
+        return $this->hasMany(Actor::class, 'nationality_id','id');
     }
 
     public function movies(){

@@ -13,7 +13,8 @@ class Movie extends Model{
         'synopsis',
         'nationality',
         'release',
-        'duration'
+        'duration',
+        'nationality_id'
     ];
 
     public function actors(){

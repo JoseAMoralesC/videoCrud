@@ -12,7 +12,8 @@ class Actor extends Model{
         'name',
         'last_name1',
         'last_name2',
-        'birth_date'
+        'birth_date',
+        'nationality_id'
     ];
 
     public function movies(){

@@ -30,6 +30,13 @@
     {!! $errors->first('birth_date','<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group">
+    {{Form::label('nationality_id',__('Nacionalidad'),array('class' => 'control-label'))}}
+    <div class="col-auto">
+        {{ Form::select('nationality_id', $nationalities, isset($actor->nationality_id) ? $actor->nationality_id : null, array('id'=> 'multi-nationalities', 'placeholder'=>'Selecciona una nacionalidad')) }}
+    </div>
+</div>
+
 
 <div class="form-group">
     <a href="{{ route('actors.index') }}" class="btn btn-danger">Volver</a>
