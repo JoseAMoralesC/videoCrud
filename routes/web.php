@@ -36,6 +36,7 @@ Route::prefix('')->name('home.')->group(function(){
 Route::prefix('movies')->name('movies.')->group(function(){
     Route::get('',[Movies\IndexController::class, 'index'])->name('index');
     Route::get('indexServerSite',[Movies\IndexController::class, 'indexServerSite'])->name('indexServerSite');
+    Route::get('indexJoin',[Movies\IndexController::class, 'indexJoin'])->name('indexJoin');
     Route::get('create',[Movies\CreateController::class, 'create'])->name('create');
     Route::post('store',[Movies\StoreController::class, 'store'])->name('store');
     Route::get('{id}/edit',[Movies\EditController::class, 'edit'])->name('edit');

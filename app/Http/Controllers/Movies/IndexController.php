@@ -18,8 +18,15 @@ class IndexController extends Controller{
     }
 
     public function index(){
-        $movies['movie'] = $this->movieRepository->allMovies();
-        return view('Movies.index', $movies);
+        return view('Movies.index', [
+            'movie' => $this->movieRepository->allMovies()
+        ]);
+    }
+
+    public function indexJoin(){
+        return view('Movies.index', [
+            'movie' => $this->movieRepository->allMoviesWithJoin()
+        ]);
     }
 
     public function indexServerSite(Request $request){

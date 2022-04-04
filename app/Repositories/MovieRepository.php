@@ -2,10 +2,18 @@
 
 namespace App\Repositories;
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class MovieRepository{
     public function allMovies(){
         return Movie::all();
+    }
+
+    public function allMoviesWithJoin(){
+        return DB::table('movies')->
+            join('actor_movie','movies.id','=','actor_movie.movie_id')->
+            join('genre_movie','movies.id','=','genre_movie.movie_id')->
+            join('nationalities','movies.nationality_id','=','nationalities.id');
     }
 
     public function getById($id){
