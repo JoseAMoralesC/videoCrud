@@ -33,7 +33,7 @@ class MovieService{
                 'id' => $movie->id,
                 'title' => $movie->title,
                 'synopsis' => $movie->synopsis,
-                'nationality' => $movie->nationality,
+                'nationality' => ($movie->nationalities != null) ? $movie->nationalities->name : '',
                 'release' => $movie->release,
                 'duration' => $movie->duration,
             ];

@@ -23,4 +23,8 @@ class Movie extends Model{
     public function genres(){
         return $this->belongsToMany(Genre::class);
     }
+
+    public function nationalities(){
+        return $this->hasOne(Nationality::class, 'id', 'nationality_id');
+    }
 }

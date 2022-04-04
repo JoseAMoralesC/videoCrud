@@ -18,4 +18,8 @@ class Actor extends Model{
     public function movies(){
         return $this->belongsToMany(Movie::class);
     }
+
+    public function nationalities(){
+        return $this->hasOne(Nationality::class);
+    }
 }
