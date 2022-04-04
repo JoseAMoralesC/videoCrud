@@ -20,8 +20,14 @@ class MovieRepository{
 
     public function update($movie, $data){
         $movie->update($data);
-        $movie->actors()->sync($movie['actor']);
-        return $movie->genres()->sync($movie['genre']);
+        if(isset($data['actor'])){
+           $movie->actors()->sync($data['actor']);
+        }
+
+        if(isset($data['genre'])){
+            $movie->genres()->sync($data['genre']);
+        }
+        return true;
     }
 
     public function delete($movie){

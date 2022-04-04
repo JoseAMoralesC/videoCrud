@@ -248,7 +248,7 @@ return [
         ],
         [
             'text'        => 'Inicio',
-            'route'         => 'index',
+            'route'         => 'home.index',
             'icon'        => 'far fa-fw fa-start',
         ],
         ['header' => 'MENU'],

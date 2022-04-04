@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Home;
 use App\Http\Controllers\Movies;
 use App\Http\Controllers\Genre;
 use App\Http\Controllers\Actors;
@@ -22,7 +22,10 @@ use App\Http\Controllers\Actors;
 | INDEX
 |--------------------------------------------------------------------------
 */
-Route::get('/',[HomeController::class, 'index'])->name('index');
+Route::prefix('')->name('home.')->group(function(){
+    Route::get('',[Home\IndexController::class, 'index'])->name('index');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +35,7 @@ Route::get('/',[HomeController::class, 'index'])->name('index');
 Route::prefix('movies')->name('movies.')->group(function(){
     Route::get('',[Movies\IndexController::class, 'index'])->name('index');
     Route::get('indexServerSite',[Movies\IndexController::class, 'indexServerSite'])->name('indexServerSite');
-    Route::get('/create',[Movies\CreateController::class, 'create'])->name('create');
+    Route::get('create',[Movies\CreateController::class, 'create'])->name('create');
     Route::post('store',[Movies\StoreController::class, 'store'])->name('store');
     Route::get('{id}/edit',[Movies\EditController::class, 'edit'])->name('edit');
     Route::put('update/{id}',[Movies\UpdateController::class, 'update'])->name('update');

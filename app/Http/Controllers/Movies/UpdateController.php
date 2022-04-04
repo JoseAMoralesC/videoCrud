@@ -22,7 +22,7 @@ class UpdateController extends Controller{
             'duration' => 'required'
         ]);
 
-        $dataRequest = $request->except('_token');
+        $dataRequest = $request->except('_token','_method');
 
         try{
             DB::connection()->beginTransaction();
