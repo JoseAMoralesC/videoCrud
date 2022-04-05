@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\MovieRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MovieService{
     private $movieRepository;
@@ -22,8 +24,21 @@ class MovieService{
         return $this->movieRepository->insert($movie,$actor);
     }*/
 
-    public function store($data){
-        return $this->movieRepository->insert($data);
+    public function store($request){
+        /*$requestData[] = [
+            'title' => $request->get('title'),
+            'synopsis' => $request->get('synopsis',null),
+            'release' => $request->get('release'),
+            'duration' => $request->get('duration'),
+            'created_at' => null,
+            'updated_at' => null,
+            'image' => null,
+            'nationality_id' => $request->get('nationality_id',null)
+        ];*/
+        $requestData = $request->except('_token');
+        if($request->file('image') != null) $requestData['image'] = (string) $request->file('image')->store('public/IMG/movies');
+
+        return $this->movieRepository->insert($requestData);
     }
 
     public function mounthDataMovies($movies){
@@ -36,6 +51,7 @@ class MovieService{
                 'nationality' => ($movie->nationalities != null) ? $movie->nationalities->name : '',
                 'release' => $movie->release,
                 'duration' => $movie->duration,
+                'img' => asset($movie->image)
             ];
         }
         return $data;
@@ -44,21 +60,13 @@ class MovieService{
     public function mounthDataMoviesIndex($movies){
         $data = [];
         foreach($movies as $movie){
-            $genres = [];
-            $actors = [];
-            if($movie->genres != null ){
-                foreach($movie->genres as $genre){
-                    array_push($genres, $genre->name);
-                }
-            }
-
-                $data[] = [
+            $data[] = [
                 'title' => $movie->title,
                 'nationality' => isset($movie->nationalities) ? $movie->nationalities->name : null,
                 'genres' => ($movie->genres != null ) ? $movie->genres : null,
                 'actors' => ($movie->actors != null ) ? $movie->actors : '',
                 'release' => $movie->release,
-                'duration' => $movie->duration
+                'duration' => $movie->duration,
             ];
         }
 

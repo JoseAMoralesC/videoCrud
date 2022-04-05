@@ -13,6 +13,7 @@
         <tr>
             <th>{{__('ID')}}</th>
             <th>{{__('Titulo')}}</th>
+            <th>{{__('Imagen')}}</th>
             <th>{{__('Sinopsis')}}</th>
             <th>{{__('Nacionalidad')}}</th>
             <th>{{ __('Estreno') }}</th>
@@ -45,9 +46,21 @@
                 "ajax": {
                     url: "{{ route('movies.indexServerSite') }}",
                     method: "get",
+                    data: {
+
+                    }
                 }, "columns": [
                     {data: 'id', 'className': 'text-center'},
                     {data: 'title', 'className': 'text-center'},
+                    {data:null,
+                        render: function(data){
+                            if(data.img != null){
+                                console.log(data.img);
+                                return "<img src='"+data.img+"' alt='imagen pelicula' />";
+                            }
+                            return '';
+                        }
+                    },
                     {data: 'synopsis', 'className': 'text-center', "orderable": true, "searchable": true},
                     {data: 'nationality', 'className': 'text-center', "orderable": true, "searchable": true},
                     {data: 'release', 'className': 'text-center', "orderable": true, "searchable": true},

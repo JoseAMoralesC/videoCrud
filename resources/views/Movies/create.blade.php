@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-    {{ Form::open(array('route' => 'movies.store', 'method' => 'post')) }}
+    {{ Form::open(array('route' => 'movies.store', 'method' => 'post','enctype'=>'multipart/form-data')) }}
         @include('Movies.formulario')
     {{ Form::close() }}
 @stop

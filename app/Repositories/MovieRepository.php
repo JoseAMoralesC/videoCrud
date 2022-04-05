@@ -22,14 +22,21 @@ class MovieRepository{
 
     public function insert($movie){
         $mov = Movie::create($movie);
-        $mov->actors()->sync($movie['actor']);
-        return $mov->genres()->sync($movie['genre']);
+        if(isset($movie['actor'])){
+            $mov->actors()->sync($movie['actor']);
+        }
+
+        if(isset($data['genre'])){
+            $mov->genres()->sync($movie['genre']);
+        }
+
+        return true;
     }
 
     public function update($movie, $data){
         $movie->update($data);
         if(isset($data['actor'])){
-           $movie->actors()->sync($data['actor']);
+            $movie->actors()->sync($data['actor']);
         }
 
         if(isset($data['genre'])){

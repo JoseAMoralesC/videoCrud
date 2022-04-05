@@ -18,15 +18,15 @@ class StoreController extends Controller{
         $request->validate([
             'title' => 'required',
             'release' => 'required',
-            'nationality' => 'required',
-            'duration' => 'required'
+            'duration' => 'required',
+
         ]);
 
-        $dataRequest = $request->except('_token');
+        $dataRequest = $request->all();
 
-        try{
+       try{
             DB::connection()->beginTransaction();
-            $this->movieService->store($dataRequest);
+            $this->movieService->store($request);
             DB::connection()->commit();
         }catch(\Exception $e){
             DB::connection()->rollBack();

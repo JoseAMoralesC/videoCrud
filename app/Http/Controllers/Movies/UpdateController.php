@@ -18,7 +18,6 @@ class UpdateController extends Controller{
         $request->validate([
             'title' => 'required',
             'release' => 'required',
-            'nationality' => 'required',
             'duration' => 'required'
         ]);
 

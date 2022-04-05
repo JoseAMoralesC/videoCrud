@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\MovieService;
 use Illuminate\Http\Request;
 use App\Repositories\MovieRepository;
+use Illuminate\Support\Facades\Storage;
 
 
 class IndexController extends Controller{
@@ -18,6 +19,7 @@ class IndexController extends Controller{
     }
 
     public function index(){
+
         return view('Movies.index', [
             'movie' => $this->movieRepository->allMovies()
         ]);

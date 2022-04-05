@@ -14,14 +14,6 @@
     {!! $errors->first('synopsis','<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group" {{ $errors->has('nationality') ? 'has-error' : '' }}>
-{{ Form::label('nationality', __('Nacionalidad'), array('class' => 'control-label')) }}
-<div class="col-auto">
-    {{ Form::text('nationality', isset($movie->nationality) ? $movie->nationality : null, array('placeholder' => __('Nacionalidad de la pelicula'))) }}
-</div>
-{!! $errors->first('nationality','<p class="help-block">:message</p>') !!}
-</div>
-
 <div class="form-group" {{ $errors->has('duration') ? 'has-error' : '' }}>
     {{ Form::label('duration', __('Duracion (Mints.)'), array('class' => 'control-label')) }}
     <div class="col-auto">
@@ -38,11 +30,12 @@
     {!! $errors->first('release','<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group">
+<div class="form-group" {{ $errors->has('actor') ? 'has-error' : '' }}>
     {{Form::label('actor',__('Actores'),array('class' => 'control-label'))}}
     <div class="col-auto">
         {{ Form::select('actor[]', $actors, isset($movie->actors) ? $movie->actors : null, array('id'=> 'multi-actors', 'multiple'=>'multiple')) }}
     </div>
+    {!! $errors->first('actor','<p class="help-block">:message</p>') !!}
 </div>
 
 <div class="form-group">
@@ -57,6 +50,14 @@
     <div class="col-auto">
         {{ Form::select('nationality_id', $nationalities, isset($movie->nationality_id) ? $movie->nationality_id : null, array('id'=> 'multi-nationalities', 'placeholder'=>'Selecciona una nacionalidad')) }}
     </div>
+</div>
+
+<div class="form-group" {{ $errors->has('image') ? 'has-error' : '' }}>
+    {{ Form::label('image', __('Imagen'), array('class' => 'control-label')) }}
+    <div class="col-auto">
+        {{ Form::file('image', array('accept'=>'image/* ')) }}
+    </div>
+    {!! $errors->first('image','<p class="help-block">:message</p>') !!}
 </div>
 
 <div class="form-group">
