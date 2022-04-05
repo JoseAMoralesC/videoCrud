@@ -45,7 +45,7 @@ class IndexController extends Controller{
 
     public function indexServerSite(Request $request){
         if($request->ajax()){
-            $movies = $this->movieRepository->listMovies($request->get('nationality_id',null));
+            $movies = $this->movieService->listMovies($request->get('nationality_id',null));
             $data = $this->movieService->mounthDataMovies($movies);
             return datatables()->of($data)->make(true);
         }

@@ -2,6 +2,7 @@
 @section('title', 'Peliculas')
 
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
 @stop
 
@@ -28,7 +29,7 @@
                 <div class="form-group p-2">
                     {{ Form::label('nationality_id', __('Nacionalidad'), array('class' => 'control-label') ) }}
                     <div class="col-auto" id="fillList">
-                        {{ Form::select('nationality_id', $data['nationalities'], isset($data['filter']['nationality_id']) ? $data['filter']['nationality_id'] : null, array('class' => 'form-control', 'id' => 'fillNationality', 'placeholder' => __('Selecciona una nacionalidad'))) }}
+                        {{ Form::select('nationality_id[]', $data['nationalities'], isset($data['filter']['nationality_id']) ? $data['filter']['nationality_id'] : null, array('class' => 'form-control', 'id' => 'fillNationality', 'multiselect' => 'multiple', 'multiple' => __('Selecciona una nacionalidad'))) }}
                     </div>
                 </div>
             </div>
@@ -65,6 +66,7 @@
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
         function datatableReload() {
@@ -95,7 +97,7 @@
                     {data:null,
                         render: function(data){
                             if(data.img != null){
-                                return "<img src='"+data.img+"' alt='imagen pelicula' />";
+                                return "<img src='"+data.img+"' alt='Portada' />";
                             }
                             return '';
                         }
@@ -161,6 +163,20 @@
             $('.resetBuscar').click(function(e){
                 e.preventDefault();
                 $('#fillNationality').val('');
+                datatableReload();
+            });
+
+            $('#fillNationality').multiselect({
+                nonSelectedText: '{{ __('Selecciona una nacionalidad') }}',
+                allSelectedText: '{{ __('Todos seleccionados') }}',
+                nSelectedText: '{{ __('seleccionados') }}',
+                filterPlaceholder: '{{ __('Buscar') }}',
+                selectAllText: '{{__('Seleccionar todos')}}',
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                buttonWidth: '100%',
+                maxHeight: 300,
             });
             /*$('table').DataTable();
 
