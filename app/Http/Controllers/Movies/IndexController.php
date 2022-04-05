@@ -31,7 +31,7 @@ class IndexController extends Controller{
             'data' => array(
                 'nationalities' => $this->nationalityRepository->listInArray(),
                 'filter' => array(
-                    'nationalities' => $request->get('nationality_id',null)
+                    'nationality_id' => $request->get('nationality_id',null)
                 )
             )
         ));

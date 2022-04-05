@@ -33,6 +33,7 @@ Route::prefix('')->name('home.')->group(function(){
 | MOVIES
 |--------------------------------------------------------------------------
 */
+
 Route::prefix('movies')->name('movies.')->group(function(){
     Route::get('',[Movies\IndexController::class, 'index'])->name('index');
     Route::get('indexServerSite',[Movies\IndexController::class, 'indexServerSite'])->name('indexServerSite');

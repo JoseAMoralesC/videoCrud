@@ -23,13 +23,13 @@
         </div>
 
         <div class="box-body">
-            {{ Form::open(array('route' => 'movies.indexServerSite', 'method' => 'get')) }}
+            {{ Form::open(array('route' => 'movies.index', 'method' => 'get')) }}
 
             <div class="row p-2">
                 <div class="form-group p-2">
                     {{ Form::label('nationality_id', __('Nacionalidad'), array('class' => 'control-label') ) }}
                     <div class="col-auto" id="fillList">
-                        {{ Form::select('nationality_id[]', $data['nationalities'], isset($data['filter']['nationality_id']) ? $data['filter']['nationality_id'] : null, array('class' => 'form-control', 'id' => 'fillNationality', 'multiselect' => 'multiple', 'multiple' => __('Selecciona una nacionalidad'))) }}
+                        {{ Form::select('nationality_id[]', $data['nationalities'], isset($data['filter']['nationality_id']) ? $data['filter']['nationality_id'] : null, array('class' => 'form-control', 'id' => 'fillNationality', 'multiple' => 'multiple')) }}
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         </div>
     </div><br/><br/>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="tabla-movies">
         <thead class="thead-dark">
         <tr>
             <th>{{__('ID')}}</th>
@@ -72,13 +72,13 @@
         function datatableReload() {
             let nationality = $('#fillNationality').val();
 
-            $('table').DataTable().destroy();
+            $('#tabla-movies').DataTable().destroy();
             fill_datatable(nationality);
-            $('table').DataTable().page(1).draw(false);
+            $('#tabla-movies').DataTable().page(1).draw(false);
         }
 
         function fill_datatable(nationality) {
-            miTabla = $('table').DataTable({
+           let miTabla = $('#tabla-movies').DataTable({
                 "order": [[0, "desc"]],
                 "stateSave": true,
                 "serverSide": true,
@@ -96,9 +96,6 @@
                     {data: 'title', 'className': 'text-center'},
                     {data:null,
                         render: function(data){
-                            if(data.img != null){
-                                return "<img src='"+data.img+"' alt='Portada' />";
-                            }
                             return '';
                         }
                     },
@@ -153,7 +150,7 @@
         }
 
         $(document).ready( function () {
-            fill_datatable('');
+            fill_datatable(null);
 
             $('#filtrarBuscar').click(function(e){
                 e.preventDefault();
@@ -162,7 +159,7 @@
 
             $('.resetBuscar').click(function(e){
                 e.preventDefault();
-                $('#fillNationality').val('');
+                $('#fillNationality').val('').val([]).multiselect('refresh');
                 datatableReload();
             });
 
