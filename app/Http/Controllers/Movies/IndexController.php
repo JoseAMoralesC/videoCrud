@@ -28,7 +28,6 @@ class IndexController extends Controller{
     public function index(Request $request){
 
         return view('Movies.index', array(
-            'movie' => $this->movieRepository->listMovies($request->get('nationality_id',null)),
             'data' => array(
                 'nationalities' => $this->nationalityRepository->listInArray(),
                 'filter' => array(
