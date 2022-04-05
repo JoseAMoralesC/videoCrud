@@ -9,6 +9,14 @@ class MovieRepository{
         return Movie::all();
     }
 
+    public function listMovies($nat){
+        $movie = Movie::query();
+        if($nat != null){
+            $movie->where('nationality_id',$nat);
+        }
+        return $movie->get();
+    }
+
     public function allMoviesWithJoin(){
         return DB::table('movies')->
             join('actor_movie','movies.id','=','actor_movie.movie_id')->

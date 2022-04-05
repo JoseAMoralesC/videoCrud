@@ -1,12 +1,48 @@
 @extends('adminlte::page')
 @section('title', 'Peliculas')
 
+@section('css')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
+@stop
+
 @section('content_header')
     <h1>{{__('Peliculas')}}</h1>
 @stop
 
 @section('content')
     <a href="{{ route('movies.create') }}" class="btn btn-success"><i class="fa fa-fw fa-plus-square"></i></a><br/><br/>
+
+    <div class="box box-default box-solid collapsed-box" style="margin-top:40px;">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{__('Filtros')}}</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            {{ Form::open(array('route' => 'movies.indexServerSite', 'method' => 'get')) }}
+
+            <div class="row p-2">
+                <div class="form-group p-2">
+                    {{ Form::label('nationality_id', __('Nacionalidad'), array('class' => 'control-label') ) }}
+                    <div class="col-auto" id="fillList">
+                        {{ Form::select('nationality_id', $data['nationalities'], isset($data['filter']['nationality_id']) ? $data['filter']['nationality_id'] : null, array('class' => 'form-control', 'id' => 'fillNationality', 'placeholder' => __('Selecciona una nacionalidad'))) }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="externaly_triggered_wrapper-controls">
+                <div>
+                    <button type="submit" id="filtrarBuscar" class="btn btn-success"><i class="fa fa-filter"></i>{{ __('Filtrar') }}</button>
+                    <button class="btn btn-success resetBuscar"><i class="fa fa-refresh"></i> {{ __('Restablecer') }}</button>
+                </div>
+            </div>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+            {{Form::close()}}
+        </div>
+    </div><br/><br/>
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -28,14 +64,18 @@
     @include('modal.modal')
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
-@stop
-
 @section('js')
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        function fill_datatable() {
+        function datatableReload() {
+            let nationality = $('#fillNationality').val();
+
+            $('table').DataTable().destroy();
+            fill_datatable(nationality);
+            $('table').DataTable().page(1).draw(false);
+        }
+
+        function fill_datatable(nationality) {
             miTabla = $('table').DataTable({
                 "order": [[0, "desc"]],
                 "stateSave": true,
@@ -47,7 +87,7 @@
                     url: "{{ route('movies.indexServerSite') }}",
                     method: "get",
                     data: {
-
+                        nationality_id: nationality
                     }
                 }, "columns": [
                     {data: 'id', 'className': 'text-center'},
@@ -55,7 +95,6 @@
                     {data:null,
                         render: function(data){
                             if(data.img != null){
-                                console.log(data.img);
                                 return "<img src='"+data.img+"' alt='imagen pelicula' />";
                             }
                             return '';
@@ -112,7 +151,17 @@
         }
 
         $(document).ready( function () {
-            fill_datatable();
+            fill_datatable('');
+
+            $('#filtrarBuscar').click(function(e){
+                e.preventDefault();
+                datatableReload();
+            });
+
+            $('.resetBuscar').click(function(e){
+                e.preventDefault();
+                $('#fillNationality').val('');
+            });
             /*$('table').DataTable();
 
             $('table .enviar-modal').click(function(){

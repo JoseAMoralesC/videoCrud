@@ -24,6 +24,10 @@ class MovieService{
         return $this->movieRepository->insert($movie,$actor);
     }*/
 
+    public function listMovies($nat){
+        return $this->movieRepository->listMovies($nat);
+    }
+
     public function store($request){
         /*$requestData[] = [
             'title' => $request->get('title'),
