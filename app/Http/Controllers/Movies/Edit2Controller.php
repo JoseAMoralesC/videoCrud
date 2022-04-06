@@ -45,7 +45,6 @@ class Edit2Controller extends Controller{
     }
 
     public function loadListActors($id){
-        \Log::info('Hola');
         return view('Movies.edit2.listActors2', [
             'movie' => $this->movieRepository->getById($id),
         ])->render();
