@@ -55,7 +55,7 @@ class MovieService{
                 'nationality' => ($movie->nationalities != null) ? $movie->nationalities->name : '',
                 'release' => $movie->release,
                 'duration' => $movie->duration,
-
+                'img' => asset($movie->image)
             ];
         }
         return $data;

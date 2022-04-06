@@ -41,6 +41,9 @@ Route::prefix('movies')->name('movies.')->group(function(){
     Route::get('create',[Movies\CreateController::class, 'create'])->name('create');
     Route::post('store',[Movies\StoreController::class, 'store'])->name('store');
     Route::get('{id}/edit',[Movies\EditController::class, 'edit'])->name('edit');
+    Route::get('{id}/edit/listaactores',[Movies\EditController::class, 'loadListActors'])->name('editActorList');
+    Route::get('{id}/edit/listageneros',[Movies\EditController::class, 'loadListGenres'])->name('editGenreList');
+    Route::get('{id}/edit2',[Movies\EditController::class, 'edit'])->name('edit2');
     Route::put('update/{id}',[Movies\UpdateController::class, 'update'])->name('update');
     Route::get('show/{id}',[Movies\ShowController::class, 'show'])->name('show');
     Route::delete('destroy/{id}',[Movies\DestroyController::class, 'destroy'])->name('destroy');

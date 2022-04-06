@@ -28,11 +28,23 @@ class EditController extends Controller{
     }
 
     public function edit($id){
-        return view('Movies.edit', [
+        return view('Movies.edit.edit', [
             'movie' => $this->movieRepository->getById($id),
             'actors' => $this->actorRepository->listActorNameInArray(),
             'genres' => $this->genreRepository->listGenreNameInArray(),
             'nationalities' => $this->nationalityRepository->listInArray()
+        ]);
+    }
+
+    public function loadListActors($id){
+        return view('Movies.edit.listActors', [
+            'movie' => $this->movieRepository->getById($id),
+        ]);
+    }
+
+    public function loadListGenres($id){
+        return view('Movies.edit.listGenres',[
+            'movie' => $this->movieRepository->getById($id),
         ]);
     }
 

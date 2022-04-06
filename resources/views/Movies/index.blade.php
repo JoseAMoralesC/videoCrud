@@ -96,6 +96,7 @@
                     {data: 'title', 'className': 'text-center'},
                     {data:null,
                         render: function(data){
+                            console.log(data.img);
                             return '';
                         }
                     },
